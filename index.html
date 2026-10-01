@@ -98,7 +98,7 @@ footer p+p{margin-top:8px;max-width:640px}
 </head>
 <body>
 <nav><div class="wrap">
-  <a class="brand" href="#top"><img src="logo.png" alt="">PICT Timetable</a>
+  <a class="brand" href="#top"><img src="logo.png" alt="">PICT Timetable <small>by Vighnesh Patil IT FY8</small></a>
   <div><a class="s" href="#features">Features</a><a class="s" href="#install">Install</a><a class="s" href="#faq">FAQ</a></div>
 </div></nav>
 
@@ -110,7 +110,6 @@ footer p+p{margin-top:8px;max-width:640px}
       <a class="btn dl" href="#">⬇ Download for Android</a>
       <a class="btn ghost" href="#install">How to install</a>
     </div>
-    <p class="meta"><b id="ver">Latest version</b> · <span id="size">Free</span> · Android 8.0 and above, tested on Android 10</p>
   </div>
   <div class="phone" aria-label="App preview"><div class="screen">
     <div class="hd"><b>PICT Timetable</b><i>Batch B8</i></div>
@@ -153,7 +152,7 @@ footer p+p{margin-top:8px;max-width:640px}
 </div></section>
 
 <section><div class="wrap">
-  <h2>Set up in under a minute</h2>
+  <h2>Set up in under a 10 seconds</h2>
   <p class="lead">No account, no login.</p>
   <div class="steps">
     <div class="step"><div><h3>Enter your roll number</h3><p>The app finds your division and lab batch from it.</p></div></div>
@@ -220,11 +219,11 @@ const CFG = {
 };
 // ======================
 const base = `https://github.com/${CFG.user}/${CFG.repo}`;
-document.querySelectorAll(".dl").forEach(a => a.href = `${base}/releases/latest/download/${CFG.apk}`);
+document.querySelectorAll(".dl").forEach(a => a.href = "https://raw.githubusercontent.com/vighneshpatil11/PICT-Timetable/refs/heads/main/PICTTimetable.apk");
 const setLink = (id, url) => { const el = document.getElementById(id); url ? el.href = url : el.style.display = "none"; };
 setLink("coffee", CFG.coffee); setLink("insta", CFG.instagram); setLink("gh", base);
 
-fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}/releases/latest`)
+fetch(`https://api.github.com/repos/${CFG.user}/${CFG.repo}`)
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(d => {
     document.getElementById("ver").textContent = d.tag_name || "Latest version";
