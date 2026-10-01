@@ -94,6 +94,49 @@ footer p+p{margin-top:8px;max-width:640px}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(10,14,36,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:none}
 .bar .btn{width:100%;justify-content:center}
 @media(max-width:700px){.bar{display:block}}
+.shot-wrap{position:relative}
+
+.shots{
+  display:flex;
+  overflow:hidden;
+  gap:0;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+}
+
+.shots figure{
+  flex:0 0 100%;
+  min-width:100%;
+  scroll-snap-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.shot{
+  width:min(320px,85vw);
+  flex:none;
+}
+
+.shot-arrow{
+  position:absolute;
+  top:45%;
+  transform:translateY(-50%);
+  z-index:5;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(10,14,36,.9);
+  color:var(--text);
+  font-size:32px;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+}
+
+.shot-arrow.left{left:4px}
+.shot-arrow.right{right:4px}
 </style>
 </head>
 <body>
@@ -140,17 +183,18 @@ footer p+p{margin-top:8px;max-width:640px}
   </div>
 </div></section>
 
-<section class="alt"><div class="wrap">
-  <h2>See it on a real phone</h2>
-  <p class="lead">Swipe through the screens.</p>
-  <div class="shots">
-    <figure><div class="shot"><div class="in"><img src="home.png" alt="Home screen" onerror="this.remove()"></div></div><figcaption class="cap">Home</figcaption></figure>
-    <figure><div class="shot"><div class="in"><img src="timetable.png" alt="Timetable screen" onerror="this.remove()"></div></div><figcaption class="cap">Timetable</figcaption></figure>
-    <figure><div class="shot"><div class="in"><img src="subjects.png" alt="Subjects screen" onerror="this.remove()"></div></div><figcaption class="cap">Subjects</figcaption></figure>
-    <figure><div class="shot"><div class="in"><img src="settings.png" alt="Settings screen" onerror="this.remove()"></div></div><figcaption class="cap">Settings</figcaption></figure>
-  </div>
-</div></section>
+<div class="shot-wrap">
+  <button class="shot-arrow left" onclick="moveShots(-1)">‹</button>
 
+  <div class="shots" id="shots">
+    <figure><div class="shot"><div class="in"><img src="home.png" alt="Home screen"></div></div><figcaption class="cap">Home</figcaption></figure>
+    <figure><div class="shot"><div class="in"><img src="timetable.png" alt="Timetable screen"></div></div><figcaption class="cap">Timetable</figcaption></figure>
+    <figure><div class="shot"><div class="in"><img src="subjects.png" alt="Subjects screen"></div></div><figcaption class="cap">Subjects</figcaption></figure>
+    <figure><div class="shot"><div class="in"><img src="settings.png" alt="Settings screen"></div></div><figcaption class="cap">Settings</figcaption></figure>
+  </div>
+
+  <button class="shot-arrow right" onclick="moveShots(1)">›</button>
+</div> 
 <section><div class="wrap">
   <h2>Set up in under a 10 seconds</h2>
   <p class="lead">No account, no login.</p>
@@ -237,6 +281,12 @@ setInterval(() => {
   mins = mins > 1 ? mins - 1 : 10 * 60 + 36;
   document.getElementById("count").textContent = `Starts in ${Math.floor(mins / 60)} h ${mins % 60} min`;
 }, 60000);
+function moveShots(direction){
+  document.getElementById("shots").scrollBy({
+    left: direction * document.querySelector(".shot").offsetWidth,
+    behavior: "smooth"
+  });
+}
 </script>
 </body>
 </html>
